@@ -6,8 +6,8 @@ public class Cat {
     private String name;
 
     public void show() {
-        System.out.println("Кота зовут " + name);
-        System.out.println("Любимая еда " + name + "а это " + food);
+        System.out.println("Имя котика " + name);
+        System.out.println(name + " ел " + food);
     }
 
     public void eat(String meat) {
