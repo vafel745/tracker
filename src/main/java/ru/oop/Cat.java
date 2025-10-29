@@ -6,8 +6,8 @@ public class Cat {
     private String name;
 
     public void show() {
-        System.out.println(name);
-        System.out.println(food);
+        System.out.println("Кота зовут " + name);
+        System.out.println("Любимая еда " + name + "а это " + food);
     }
 
     public void eat(String meat) {
@@ -19,15 +19,13 @@ public class Cat {
     }
 
     public static void main(String[] args) {
-        System.out.println("There are gav's food.");
         Cat gav = new Cat();
-        gav.eat("kotleta");
-        gav.giveNick("Cat1");
+        gav.eat("котлета");
+        gav.giveNick("Бобик");
         gav.show();
-        System.out.println("There are black's food.");
         Cat black = new Cat();
-        black.eat("fish");
-        black.giveNick("Cat2");
+        black.eat("рыба");
+        black.giveNick("Блобик");
         black.show();
     }
 }
