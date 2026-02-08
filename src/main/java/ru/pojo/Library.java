@@ -1,5 +1,7 @@
 package ru.pojo;
 
+import java.util.Objects;
+
 public class Library {
     public static void main(String[] args) {
         Book bookOne = new Book("first", 10);
@@ -7,12 +9,7 @@ public class Library {
         Book bookThree = new Book("thirst", 30);
         Book bookFour = new Book("Clean code", 40);
         Book temp = new Book("", 0);
-        Book[] books = new Book[5];
-        books[0] = bookOne;
-        books[1] = bookTwo;
-        books[2] = bookThree;
-        books[3] = bookFour;
-        books[4] = temp;
+        Book[] books = new Book[]{bookOne, bookTwo, bookThree, bookFour, temp};
         for (int i = 0; i < books.length - 1; i++) {
             Book allBooks = books[i];
             System.out.println(allBooks.getName() + " - " + allBooks.getNumberOfPages());
@@ -27,9 +24,9 @@ public class Library {
         }
         System.out.println("\nBooks with the name Clean code only\n");
         for (int i = 0; i < books.length - 1; i++) {
-            Book allBooks = books[i];
-            if (allBooks.getName() == "Clean code") {
-                System.out.println(allBooks.getName() + " - " + allBooks.getNumberOfPages());
+            Book book = books[i];
+            if (Objects.equals(book.getName(), "Clean code")) {
+                System.out.println(book.getName() + " - " + book.getNumberOfPages());
             }
         }
     }
