@@ -11,16 +11,16 @@ public class Library {
         Book temp = new Book("", 0);
         Book[] books = new Book[]{bookOne, bookTwo, bookThree, bookFour, temp};
         for (int i = 0; i < books.length - 1; i++) {
-            Book allBooks = books[i];
-            System.out.println(allBooks.getName() + " - " + allBooks.getNumberOfPages());
+            Book book = books[i];
+            System.out.println(book.getName() + " - " + book.getNumberOfPages());
         }
         System.out.println("\nSwitch booksOne and booksThree\n");
         temp = books[3];
         books[3] = books[0];
         books[0] = temp;
         for (int i = 0; i < books.length - 1; i++) {
-            Book allBooks = books[i];
-            System.out.println(allBooks.getName() + " - " + allBooks.getNumberOfPages());
+            Book book = books[i];
+            System.out.println(book.getName() + " - " + book.getNumberOfPages());
         }
         System.out.println("\nBooks with the name Clean code only\n");
         for (int i = 0; i < books.length - 1; i++) {
