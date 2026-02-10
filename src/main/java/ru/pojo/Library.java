@@ -1,5 +1,7 @@
 package ru.pojo;
 
+import java.util.Objects;
+
 public class Library {
     public static void main(String[] args) {
         Book bookOne = new Book("first", 10);
@@ -23,7 +25,7 @@ public class Library {
         System.out.println("\nBooks with the name Clean code only\n");
         for (int i = 0; i < books.length - 1; i++) {
             Book book = books[i];
-            if (book.getName().equals("Clean code")) {
+            if (Objects.equals(book.getName(), "Clean code")) {
                 System.out.println(book.getName() + " - " + book.getNumberOfPages());
             }
         }
