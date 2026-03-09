@@ -53,29 +53,41 @@ public class TrackerTest {
     }
 
     @Test
-    public void whenTestFindAll10() {
+    public void whenTheIdDoesNotExist() {
         Tracker tracker = new Tracker();
-        Item first = new Item("First");
-        Item second = new Item("Second");
-        Item third  = new Item("Three");
-        Item fourth  = new Item("Four");
-        Item fifth   = new Item("Five");
-        Item sixth  = new Item("Six");
-        Item seventh  = new Item("Seven");
-        Item eighth  = new Item("Eight");
-        Item ninth  = new Item("Nine");
-        Item tenth = new Item("Ten");
+        Item first = new Item("a");
+        Item second = new Item("b");
+        Item third = new Item("c");
+        Item fourth = new Item("d");
+        Item fifth = new Item("e");
         tracker.add(first);
         tracker.add(second);
         tracker.add(third);
         tracker.add(fourth);
         tracker.add(fifth);
-        tracker.add(sixth);
-        tracker.add(seventh);
-        tracker.add(eighth);
-        tracker.add(ninth);
-        tracker.add(tenth);
-        Item result = tracker.findAll()[4];
-        assertThat(result.getName()).isEqualTo(fifth.getName());
+        Item result = tracker.findById(4);
+        assertThat(result.getId()).isEqualTo(fourth.getId());
+    }
+
+    @Test
+    public void whenReplaceItemIsSuccessful() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("Bug");
+        tracker.add(item);
+        int id = item.getId();
+        Item updateItem = new Item("Bug with description");
+        tracker.replace(id, updateItem);
+        assertThat(tracker.findById(id).getName()).isEqualTo("Bug with description");
+    }
+
+    @Test
+    public void whenReplaceItemIsNotSuccessful() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("Bug");
+        tracker.add(item);
+        Item updateItem = new Item("Bug with description");
+        boolean result = tracker.replace(1000, updateItem);
+        assertThat(tracker.findById(item.getId()).getName()).isEqualTo("Bug");
+        assertThat(result).isFalse();
     }
 }
