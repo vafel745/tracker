@@ -27,6 +27,17 @@ public class StartUI {
                         System.out.println(items[i]);
                     }
                 }
+            } else if (select == 2) {
+                System.out.println("=== Изменение заявки ===\nВведите id заявки которую хотите заменить");
+                int idItem = Integer.parseInt(scanner.nextLine());
+                System.out.println("Напишите новое имя");
+                String name = scanner.nextLine();
+                Item item = new Item(name);
+                if (!tracker.replace(idItem, item)) {
+                    System.out.println("Заявки с таким id не существует");
+                } else {
+                    System.out.println("Изменённая заявка: " + item);
+                }
             } else if (select == 6) {
                 run = false;
             }
