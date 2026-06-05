@@ -41,12 +41,13 @@ public class StartUI {
             } else if (select == 3) {
                 System.out.println("=== Удаление заявки ===\nВведите id заявки которую хотите удалить");
                 int idItem = Integer.parseInt(scanner.nextLine());
-                tracker.delete(idItem);
                 if (tracker.findById(idItem) == null) {
                     System.out.println("Заявки с таким id не существует");
                 } else {
+                    tracker.delete(idItem);
                     System.out.println("Заявка удалена");
                 }
+
             } else if (select == 6) {
                 run = false;
             }
