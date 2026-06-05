@@ -47,7 +47,6 @@ public class StartUI {
                     tracker.delete(idItem);
                     System.out.println("Заявка удалена");
                 }
-
             } else if (select == 6) {
                 run = false;
             }
