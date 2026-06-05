@@ -60,7 +60,7 @@ public class StartUI {
                 System.out.println("=== Поиск заявки(ок) по id ===\nВведите имя заявки(ок) которую хотите найти");
                 String name = scanner.nextLine();
                 Item[] items = tracker.findByName(name);
-                if (items != null) {
+                if (items.length != 0) {
                     for (int i = 0; i < items.length; i++) {
                         System.out.println(items[i]);
                     }
