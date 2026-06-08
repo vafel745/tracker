@@ -27,25 +27,21 @@ public class StartUI {
     }
 
     public static void findItemByName(Input input, Tracker tracker) {
-        String msg;
         System.out.println("=== Поиск заявки(ок) по id ===");
-        msg = "Введите имя заявки(ок) которую хотите найти: ";
-        String name = input.askStr(msg);
+        String name = input.askStr("Введите имя заявки(ок) которую хотите найти: ");
         Item[] items = tracker.findByName(name);
         if (items.length != 0) {
             for (int i = 0; i < items.length; i++) {
                 System.out.println(items[i]);
             }
         } else {
-            System.out.println("Заявки(ок) с таким именем нету");
+            System.out.println("Заявки(ок) с таким именем не существует");
         }
     }
 
     public static void findItemById(Input input, Tracker tracker) {
-        String msg;
         System.out.println("=== Поиск заявки по id ===");
-        msg = "Введите id заявки которую хотите найти: ";
-        int idItem = input.askInt(msg);
+        int idItem = input.askInt("Введите id заявки которую хотите найти: ");
         Item item = tracker.findById(idItem);
         if (item == null) {
             System.out.println("Заявки с таким id не существует");
@@ -55,10 +51,8 @@ public class StartUI {
     }
 
     public static void deleteItem(Input input, Tracker tracker) {
-        String msg;
         System.out.println("=== Удаление заявки ===");
-        msg = "Введите id заявки которую хотите удалить: ";
-        int idItem = input.askInt(msg);
+        int idItem = input.askInt("Введите id заявки которую хотите удалить: ");
         if (tracker.findById(idItem) == null) {
             System.out.println("Заявки с таким id не существует");
         } else {
@@ -68,12 +62,9 @@ public class StartUI {
     }
 
     public static void replaceItem(Input input, Tracker tracker) {
-        String msg;
         System.out.println("=== Изменение заявки ===");
-        msg = "Введите id заявки которую хотите заменить: ";
-        int idItem = input.askInt(msg);
-        msg = "Напишите новое имя: ";
-        String name = input.askStr(msg);
+        int idItem = input.askInt("Введите id заявки которую хотите заменить: ");
+        String name = input.askStr("Напишите новое имя: ");
         Item item = new Item(name);
         if (!tracker.replace(idItem, item)) {
             System.out.println("Заявки с таким id не существует");
@@ -95,10 +86,8 @@ public class StartUI {
     }
 
     public static void createItem(Input input, Tracker tracker) {
-        String msg;
         System.out.println("=== Создание новой заявки ===");
-        msg = "Введите имя: ";
-        String name = input.askStr(msg);
+        String name = input.askStr("Введите имя: ");
         Item item = new Item(name);
         tracker.add(item);
         System.out.println("Добавленная заявка: " + item);
