@@ -1,19 +1,17 @@
 package ru.tracker;
 
-import java.util.Scanner;
-
 public class StartUI {
-
-    public void init(Scanner scanner, Tracker tracker) {
+    public void init(Input input, Tracker tracker) {
         boolean run = true;
+        String msg;
         while (run) {
             showMenu();
-            System.out.print("Выбрать: ");
-            int select = Integer.parseInt(scanner.nextLine());
+            msg = "Выбрать: ";
+            int select = input.askInt(msg);
             if (select == 0) {
                 System.out.println("=== Создание новой заявки ===");
-                System.out.print("Введите имя: ");
-                String name = scanner.nextLine();
+                msg = "Введите имя: ";
+                String name = input.askStr(msg);
                 Item item = new Item(name);
                 tracker.add(item);
                 System.out.println("Добавленная заявка: " + item);
@@ -28,10 +26,11 @@ public class StartUI {
                     }
                 }
             } else if (select == 2) {
-                System.out.println("=== Изменение заявки ===\nВведите id заявки которую хотите заменить");
-                int idItem = Integer.parseInt(scanner.nextLine());
-                System.out.println("Напишите новое имя");
-                String name = scanner.nextLine();
+                System.out.println("=== Изменение заявки ===");
+                msg = "Введите id заявки которую хотите заменить: ";
+                int idItem = input.askInt(msg);
+                msg = "Напишите новое имя: ";
+                String name = input.askStr(msg);
                 Item item = new Item(name);
                 if (!tracker.replace(idItem, item)) {
                     System.out.println("Заявки с таким id не существует");
@@ -39,8 +38,9 @@ public class StartUI {
                     System.out.println("Изменённая заявка: " + item);
                 }
             } else if (select == 3) {
-                System.out.println("=== Удаление заявки ===\nВведите id заявки которую хотите удалить");
-                int idItem = Integer.parseInt(scanner.nextLine());
+                System.out.println("=== Удаление заявки ===");
+                msg = "Введите id заявки которую хотите удалить: ";
+                int idItem = input.askInt(msg);
                 if (tracker.findById(idItem) == null) {
                     System.out.println("Заявки с таким id не существует");
                 } else {
@@ -48,8 +48,9 @@ public class StartUI {
                     System.out.println("Заявка удалена");
                 }
             } else if (select == 4) {
-                System.out.println("=== Поиск заявки по id ===\nВведите id заявки которую хотите найти");
-                int idItem = Integer.parseInt(scanner.nextLine());
+                System.out.println("=== Поиск заявки по id ===");
+                msg = "Введите id заявки которую хотите найти: ";
+                int idItem = input.askInt(msg);
                 Item item = tracker.findById(idItem);
                 if (item == null) {
                     System.out.println("Заявки с таким id не существует");
@@ -57,8 +58,9 @@ public class StartUI {
                     System.out.println(item);
                 }
             } else if (select == 5) {
-                System.out.println("=== Поиск заявки(ок) по id ===\nВведите имя заявки(ок) которую хотите найти");
-                String name = scanner.nextLine();
+                System.out.println("=== Поиск заявки(ок) по id ===");
+                msg = "Введите имя заявки(ок) которую хотите найти: ";
+                String name = input.askStr(msg);
                 Item[] items = tracker.findByName(name);
                 if (items.length != 0) {
                     for (int i = 0; i < items.length; i++) {
@@ -85,8 +87,8 @@ public class StartUI {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        new StartUI().init(scanner, tracker);
+        new StartUI().init(input, tracker);
     }
 }
