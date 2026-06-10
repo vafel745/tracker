@@ -1,6 +1,12 @@
 package ru.tracker;
 
 public class FindAllAction implements UserAction {
+    private final Output output;
+
+    public FindAllAction(Output output) {
+        this.output = output;
+    }
+
     @Override
     public String name() {
         return "Показать все заявки";
@@ -9,9 +15,9 @@ public class FindAllAction implements UserAction {
     @Override
     public boolean execute(Input input, Tracker tracker) {
         Item[] items = tracker.findAll();
-        System.out.println("=== Вывод всех заявок ===");
+        output.println("=== Вывод всех заявок ===");
         if (items.length == 0) {
-            System.out.println("Хранилище ещё не содержит заявок");
+            output.println("Хранилище ещё не содержит заявок");
         } else {
             for (int i = 0; i < items.length; i++) {
                 System.out.println(items[i]);
