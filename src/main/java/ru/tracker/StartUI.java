@@ -1,5 +1,11 @@
 package ru.tracker;
 
+import ru.tracker.action.*;
+import ru.tracker.input.ConsoleInput;
+import ru.tracker.input.Input;
+import ru.tracker.output.ConsoleOutput;
+import ru.tracker.output.Output;
+
 public class StartUI {
     private final Output output;
 
@@ -7,17 +13,17 @@ public class StartUI {
         this.output = output;
     }
 
-    public void init(Input input, Tracker tracker, UserAction[] actions) {
+    public void init(Input input, Tracker tracker, User[] actions) {
         boolean run = true;
         while (run) {
             showMenu(actions);
             int select = input.askInt("Выбрать: ");
-            UserAction action = actions[select];
+            User action = actions[select];
             run = action.execute(input, tracker);
         }
     }
 
-    private void showMenu(UserAction[] actions) {
+    private void showMenu(User[] actions) {
         output.println("Меню:");
         for (int index = 0; index < actions.length; index++) {
             output.println(index + ". " + actions[index].name());
@@ -28,14 +34,14 @@ public class StartUI {
         Output output = new ConsoleOutput();
         Input input = new ConsoleInput();
         Tracker tracker = new Tracker();
-        UserAction[] actions = {
-                new CreateAction(output),
-                new FindAllAction(output),
-                new ReplaceAction(output),
-                new DeleteAction(output),
-                new FindByIdAction(output),
-                new FindByNameAction(output),
-                new ExitAction(output)
+        User[] actions = {
+                new Create(output),
+                new FindAll(output),
+                new Replace(output),
+                new Delete(output),
+                new FindById(output),
+                new FindByName(output),
+                new Exit(output)
         };
         new StartUI(output).init(input, tracker, actions);
     }
