@@ -114,41 +114,41 @@ class StartUITest {
         );
     }
 
-//    @Test
-//    void whenFindAllItemsTestOutputIsSuccessfully() {
-//        Output output = new MockOutput();
-//        String nameItemOne = "item";
-//        String nameItemTwo = "item two";
-//        Input input = new MockInput(
-//                new String[]{
-//                        "0",
-//                        "1"
-//                }
-//        );
-//        Tracker tracker = new Tracker();
-//        Item itemOne = new Item(nameItemOne);
-//        tracker.add(itemOne);
-//        Item itemTwo = new Item(nameItemTwo);
-//        tracker.add(itemTwo);
-//        UserAction[] actions = {
-//                new FindAllAction(output),
-//                new ExitAction(output)
-//        };
-//        new StartUI(output).init(input, tracker, actions);
-//        String ln = System.lineSeparator();
-//        assertThat(output.toString()).isEqualTo(
-//                "Меню:" + ln
-//                        + "0. Показать все заявки" + ln
-//                        + "1. Завершить программу" + ln
-//                        + "=== Вывод всех заявок ===" + ln
-//                        + itemOne + ln
-//                        + itemTwo + ln
-//                        + "Меню:" + ln
-//                        + "0. Показать все заявки" + ln
-//                        + "1. Завершить программу" + ln
-//                        + "=== Завершение программы ===" + ln
-//        );
-//    }
+    @Test
+    void whenFindAllItemsTestOutputIsSuccessfully() {
+        Output output = new MockOutput();
+        String nameItemOne = "item";
+        String nameItemTwo = "item two";
+        Input input = new MockInput(
+                new String[]{
+                        "0",
+                        "1"
+                }
+        );
+        Tracker tracker = new Tracker();
+        Item itemOne = new Item(nameItemOne);
+        tracker.add(itemOne);
+        Item itemTwo = new Item(nameItemTwo);
+        tracker.add(itemTwo);
+        UserAction[] actions = {
+                new FindAllAction(output),
+                new ExitAction(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Показать все заявки" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Вывод всех заявок ===" + ln
+                        + itemOne + ln
+                        + itemTwo + ln
+                        + "Меню:" + ln
+                        + "0. Показать все заявки" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Завершение программы ===" + ln
+        );
+    }
 
     @Test
     void whenFindAllItemsTestOutputIsNotSuccessful() {
