@@ -5,7 +5,6 @@ public class FactorialRecursion {
         if (n == 0) {
             return n;
         }
-        System.out.println(n);
         return calc(n - 1) * n;
     }
 
