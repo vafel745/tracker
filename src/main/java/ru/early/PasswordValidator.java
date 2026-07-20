@@ -1,0 +1,77 @@
+package ru.early;
+
+public class PasswordValidator {
+    private static final String[] FORBIDDEN = {"qwerty", "12345", "password", "admin", "user"};
+
+    /**
+     * Метод проверят пароль по правилам:
+     *  1. Если password null, то выбросить исключение "Password can't be null";
+     *  2. Длина пароля находится в диапазоне [8, 32],
+     *     если нет то "Password should be length [8, 32]";
+     *  3. Пароль содержит хотя бы один символ в верхнем регистре,
+     *     если нет то "Password should contain at least one uppercase letter");
+     *  4. Пароль содержит хотя бы один символ в нижнем регистре,
+     *     если нет то "Password should contain at least one lowercase letter";
+     *  5. Пароль содержит хотя бы одну цифру,
+     *     если нет то"Password should contain at least one figure");
+     *  6. Пароль содержит хотя бы один спец. символ (не цифра и не буква),
+     *     если нет то "Password should contain at least one special symbol");
+     *  7. Пароль не содержит подстрок без учета регистра: qwerty, 12345, password, admin, user.
+     *     Без учета регистра, значит что, например, ни qwerty ни QWERTY ни qwErty и т.п.
+     *     если да, то "Password shouldn't contain substrings: qwerty, 12345, password, admin, user".
+     * @param password Пароль
+     * @return Вернет пароль или выбросит исключение.
+     */
+    public static String validate(String password) {
+
+        int upperCaseCharacterCounter = 0;
+        int lowerCaseCharacterCounter = 0;
+        int number = 0;
+        int specialCharacter = 0;
+
+        if (password == null) {
+            throw new IllegalArgumentException("Password can't be null");
+        }
+        if (password.length() < 8 || password.length() > 32) {
+            throw new IllegalArgumentException("Password should be length [8, 32]");
+        }
+
+        for (int i = 0; i < password.length(); i++) {
+            if (Character.isUpperCase(password.charAt(i))) {
+                upperCaseCharacterCounter++;
+            }
+            if (Character.isLowerCase(password.charAt(i))) {
+                lowerCaseCharacterCounter++;
+            }
+            if (Character.isDigit(password.charAt(i))) {
+                number++;
+            }
+            if (!Character.isLetterOrDigit(password.charAt(i))) {
+                specialCharacter++;
+            }
+        }
+
+        if (upperCaseCharacterCounter == 0) {
+            throw new IllegalArgumentException("Password should contain at least one uppercase letter");
+        }
+        if (lowerCaseCharacterCounter == 0) {
+            throw new IllegalArgumentException("Password should contain at least one lowercase letter");
+        }
+        if (number == 0) {
+            throw new IllegalArgumentException("Password should contain at least one figure");
+        }
+        if (specialCharacter == 0) {
+            throw new IllegalArgumentException("Password should contain at least one special symbol");
+        }
+
+        String passwordUpperCase = password.toLowerCase();
+
+        for (String ban : FORBIDDEN) {
+            if (passwordUpperCase.contains(ban)) {
+                throw new IllegalArgumentException("Password shouldn't contain substrings: qwerty, 12345, password, admin, user");
+            }
+        }
+        return password;
+    }
+}
+
