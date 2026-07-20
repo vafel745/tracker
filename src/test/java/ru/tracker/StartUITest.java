@@ -7,7 +7,8 @@ import ru.tracker.input.MockInput;
 import ru.tracker.output.MockOutput;
 import ru.tracker.output.Output;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.InstanceOfAssertFactories.atomicReferenceArray;
 
 class StartUITest {
     @Test
@@ -319,6 +320,40 @@ class StartUITest {
                         + "Заявки с таким id не существует" + ln
                         + "Меню:" + ln
                         + "0. Найти заявку по id" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Завершение программы ===" + ln
+        );
+    }
+
+    @Test
+    void whenInvalidExit() {
+        Output output = new MockOutput();
+        Input input = new MockInput(
+                new String[]{
+                        "7",
+                        "0",
+                        "1"
+                }
+        );
+        Tracker tracker = new Tracker();
+        User[] actions = {
+                new FindAll(output),
+                new Exit(output)
+        };
+        new StartUI(output).init(input, tracker, actions);
+        String ln = System.lineSeparator();
+        assertThat(output.toString()).isEqualTo(
+                "Меню:" + ln
+                        + "0. Показать все заявки" + ln
+                        + "1. Завершить программу" + ln
+                        + "Неверный ввод, вы можете выбрать: 0 .. 1" + ln
+                        + "Меню:" + ln
+                        + "0. Показать все заявки" + ln
+                        + "1. Завершить программу" + ln
+                        + "=== Вывод всех заявок ===" + ln
+                        + "Хранилище ещё не содержит заявок" + ln
+                        + "Меню:" + ln
+                        + "0. Показать все заявки" + ln
                         + "1. Завершить программу" + ln
                         + "=== Завершение программы ===" + ln
         );
