@@ -8,7 +8,6 @@ import ru.tracker.output.MockOutput;
 import ru.tracker.output.Output;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.assertj.core.api.InstanceOfAssertFactories.atomicReferenceArray;
 
 class StartUITest {
     @Test
