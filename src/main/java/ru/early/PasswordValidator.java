@@ -37,14 +37,20 @@ public class PasswordValidator {
         }
 
         for (int i = 0; i < password.length(); i++) {
+            if (upperCaseCharacterCounter >= 1 && lowerCaseCharacterCounter >= 1 && number >= 1 && specialCharacter >= 1) {
+                break;
+            }
             if (Character.isUpperCase(password.charAt(i))) {
                 upperCaseCharacterCounter++;
+                continue;
             }
             if (Character.isLowerCase(password.charAt(i))) {
                 lowerCaseCharacterCounter++;
+                continue;
             }
             if (Character.isDigit(password.charAt(i))) {
                 number++;
+                continue;
             }
             if (!Character.isLetterOrDigit(password.charAt(i))) {
                 specialCharacter++;
