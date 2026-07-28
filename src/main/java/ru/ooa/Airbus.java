@@ -3,7 +3,7 @@ package ru.ooa;
 import java.util.Objects;
 
 public final class Airbus extends Aircraft {
-    private static int COUNT_ENGINE = 2;
+    private static final int COUNT_ENGINE = 2;
 
     private String name;
 
@@ -25,8 +25,8 @@ public final class Airbus extends Aircraft {
     }
 
     public void printCountEngine() {
-        COUNT_ENGINE = Objects.equals(name, "A380") ? 4 : COUNT_ENGINE;
-        System.out.println("Количество двигателей равно: " + COUNT_ENGINE);
+        int countEngine = Objects.equals(name, "A380") ? 4 : COUNT_ENGINE;
+        System.out.println("Количество двигателей равно: " + countEngine);
     }
 
     @Override
