@@ -7,8 +7,20 @@ public class ConvertList2Array {
     public static int[][] toArray(List<Integer> list, int cells) {
         int groups = (int) Math.ceil((double) list.size() / cells);
         int[][] array = new int[groups][cells];
+        int row = 0;
+        int cell = 0;
+        for (Integer number : list) {
+            array[row][cell] = number;
+            if (cell == cells - 1) {
+                cell = 0;
+                row++;
+                continue;
+            }
+            cell++;
+        }
         return array;
     }
+
 
     public static void main(String[] args) {
         List<Integer> list = List.of(1, 2, 3, 4, 5, 6, 7);
