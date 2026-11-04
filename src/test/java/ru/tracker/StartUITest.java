@@ -22,7 +22,7 @@ class StartUITest {
                 new Exit(output)
         };
         new StartUI(output).init(input, tracker, actions);
-        Item created = tracker.findAll()[0];
+        Item created = tracker.findAll().get(0);
         assertThat(created.getName()).isEqualTo("Item name");
         assertThat(output.toString()).isEqualTo(
                 "Меню:" + System.lineSeparator()
