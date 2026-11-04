@@ -4,6 +4,7 @@ import ru.tracker.input.Input;
 import ru.tracker.Item;
 import ru.tracker.output.Output;
 import ru.tracker.Tracker;
+import java.util.List;
 
 public class FindByName implements User {
     private final Output output;
@@ -21,10 +22,10 @@ public class FindByName implements User {
     public boolean execute(Input input, Tracker tracker) {
         output.println("=== Поиск заявки(ок) по имени ===");
         String name = input.askStr("Введите имя заявки(ок) которую хотите найти: ");
-        Item[] items = tracker.findByName(name);
-        if (items.length != 0) {
-            for (int i = 0; i < items.length; i++) {
-                output.println(items[i]);
+        List<Item> items = tracker.findByName(name);
+        if (!items.isEmpty()) {
+            for (Item item : items) {
+                output.println(item);
             }
         } else {
             output.println("Заявки(ок) с таким именем не существует");
