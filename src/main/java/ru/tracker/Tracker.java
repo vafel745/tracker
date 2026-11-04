@@ -1,38 +1,37 @@
 package ru.tracker;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class Tracker {
-    private final Item[] items = new Item[100];
+    private final List<Item> items = new ArrayList<>();
     private int ids = 1;
     private int size = 0;
 
     public Item add(Item item) {
         item.setId(ids++);
-        items[size++] = item;
+        items.add(size++, item);
         return item;
     }
 
-    public Item[] findAll() {
-        return Arrays.copyOf(items, size);
+    public List<Item> findAll() {
+        return items;
     }
 
-    public Item[] findByName(String key) {
-        Item[] rsl = new Item[size];
-        int sizeName = 0;
-        for (int i = 0; i < size; i++) {
-            Item item = items[i];
+    public List<Item> findByName(String key) {
+        List<Item> rsl = new ArrayList<>();
+        for (Item item : items) {
             if (Objects.equals(item.getName(), key)) {
-                rsl[sizeName++] = items[i];
+                rsl.add(item);
             }
         }
-        return Arrays.copyOf(rsl, sizeName);
+        return rsl;
     }
 
     private int indexOf(int id) {
         for (int i = 0; i < size; i++) {
-            Item item = items[i];
+            Item item = items.get(i);
             if (item.getId() == id) {
                 return i;
             }
@@ -43,7 +42,7 @@ public class Tracker {
     public Item findById(int id) {
         int index = indexOf(id);
         if (index != -1) {
-            return items[index];
+            return items.get(index);
         }
         return null;
     }
@@ -53,7 +52,7 @@ public class Tracker {
         boolean rsl = index != -1;
         if (rsl) {
             item.setId(id);
-            items[index] = item;
+            items.set(index, item);
         }
         return rsl;
     }
@@ -62,8 +61,9 @@ public class Tracker {
         int index = indexOf(id);
         boolean rsl = index != -1;
         if (rsl) {
-            System.arraycopy(items, index + 1, items, index, size - index - 1);
-            items[size - 1] = null;
+//            System.arraycopy(items, index + 1, items, index, size - index - 1);
+            items.addAll(index + 1, items);
+            items.set(size - 1, null);
             size--;
         }
     }
